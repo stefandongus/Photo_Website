@@ -505,7 +505,7 @@
     <div class="shooting-header">
       <div class="shooting-title">The Global Edit — Mixed Faces of Now</div>
     </div>
-    <div class="shooting-grid" data-shooting="10_The_Global_Edit_Mixed_Faces" data-title="The Global Edit — Mixed Faces of Now">
+    <div class="shooting-grid" data-shooting="10_The_Global_Edit_Mixed_Faces" data-title="The Global Edit — Mixed Faces of Now" data-hero-gallery="true">
       <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_921.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_3272.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_DSC4774.jpg" alt="" loading="lazy"></div>
@@ -630,10 +630,7 @@
     <div class="shooting-header">
       <div class="shooting-title">The Inner Circle of Eyewear</div>
     </div>
-    <div class="shooting-opener">
-      <img src="images/16_The_Inner_Circle_of_Eyewear/opener.jpg" alt="The Inner Circle of Eyewear Opener" loading="lazy">
-    </div>
-    <div class="shooting-grid" data-shooting="16_The_Inner_Circle_of_Eyewear" data-title="The Inner Circle of Eyewear">
+    <div class="shooting-grid" data-shooting="16_The_Inner_Circle_of_Eyewear" data-title="The Inner Circle of Eyewear" data-hero-gallery="true">
       <div class="grid-item"><img src="images/16_The_Inner_Circle_of_Eyewear/1_DSC3642-02.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/16_The_Inner_Circle_of_Eyewear/Reiz-1_DSC4336-bw.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/16_The_Inner_Circle_of_Eyewear/0-Blake-Kuwahara.jpg" alt="" loading="lazy"></div>
@@ -858,6 +855,26 @@
     });
   });
 
+  // ── Hero-gallery height: same as a typical opener ─────────────────────────
+  function applyHeroGalleryHeights() {
+    // Collect all rendered opener heights
+    const heights = [];
+    document.querySelectorAll('.shooting-opener img').forEach(img => {
+      if (img.clientHeight > 10) heights.push(img.clientHeight);
+    });
+    if (heights.length === 0) return;
+    // Use median to avoid outliers
+    heights.sort((a, b) => a - b);
+    const median = heights[Math.floor(heights.length / 2)];
+
+    document.querySelectorAll('.shooting-grid[data-hero-gallery]').forEach(grid => {
+      grid.querySelectorAll('.grid-item img').forEach(img => {
+        img.style.height = median + 'px';
+        img.style.width  = 'auto';
+      });
+    });
+  }
+
   // Recalculate heights on resize
   window.addEventListener('resize', () => {
     document.querySelectorAll('.shooting').forEach(section => {
@@ -871,6 +888,7 @@
         img.style.width  = 'auto';
       });
     });
+    applyHeroGalleryHeights();
   });
 
   // Fallback: recalculate after full page load
@@ -886,6 +904,7 @@
         img.style.width  = 'auto';
       });
     });
+    applyHeroGalleryHeights();
   });
 </script>
 </body>
