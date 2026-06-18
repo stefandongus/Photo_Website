@@ -860,22 +860,24 @@
     // Use median to avoid outliers
     heights.sort((a, b) => a - b);
     const median = heights[Math.floor(heights.length / 2)];
+    const maxH   = window.innerHeight * 0.75;
+    const h      = Math.min(median, maxH);
 
     document.querySelectorAll('.shooting-grid[data-hero-gallery]').forEach(grid => {
       grid.querySelectorAll('.grid-item img').forEach(img => {
-        img.style.height = median + 'px';
+        img.style.height = h + 'px';
         img.style.width  = 'auto';
       });
     });
   }
 
-  // Recalculate heights on resize
-  window.addEventListener('resize', () => {
+  function recalcAllHeights() {
+    const maxH = window.innerHeight * 0.75;
     document.querySelectorAll('.shooting').forEach(section => {
       const openerImg = section.querySelector('.shooting-opener img');
       const grid      = section.querySelector('.shooting-grid');
       if (!openerImg || !grid) return;
-      const h = openerImg.clientHeight * 0.725;
+      const h = Math.min(openerImg.clientHeight * 0.725, maxH);
       if (h < 10) return;
       grid.querySelectorAll('.grid-item img').forEach(img => {
         img.style.height = h + 'px';
@@ -883,23 +885,10 @@
       });
     });
     applyHeroGalleryHeights();
-  });
+  }
 
-  // Fallback: recalculate after full page load
-  window.addEventListener('load', () => {
-    document.querySelectorAll('.shooting').forEach(section => {
-      const openerImg = section.querySelector('.shooting-opener img');
-      const grid      = section.querySelector('.shooting-grid');
-      if (!openerImg || !grid) return;
-      const h = openerImg.clientHeight * 0.725;
-      if (h < 10) return;
-      grid.querySelectorAll('.grid-item img').forEach(img => {
-        img.style.height = h + 'px';
-        img.style.width  = 'auto';
-      });
-    });
-    applyHeroGalleryHeights();
-  });
+  window.addEventListener('resize', recalcAllHeights);
+  window.addEventListener('load',   recalcAllHeights);
 </script>
 </body>
 </html>
