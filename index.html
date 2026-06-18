@@ -112,31 +112,70 @@
     }
 
     /* ── Grid ── */
-    .shooting-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: var(--gap);
-      padding: 0;
-      align-items: start;
+    /* ── Gallery Wrapper (added by JS) ── */
+    .gallery-wrap {
+      position: relative;
+      overflow: hidden;
     }
 
+    /* ── Gallery: horizontal slider ── */
+    .shooting-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      gap: var(--gap);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .shooting-grid::-webkit-scrollbar { display: none; }
+
     .grid-item {
-      overflow: hidden;
+      flex-shrink: 0;
       cursor: pointer;
-      background: #f5f5f5;
+      overflow: hidden;
     }
 
     .grid-item img {
-      width: 100%;
-      height: auto;
       display: block;
+      width: auto;
+      /* height set via JS = 72.5% of opener height */
       transition: opacity 0.3s ease;
-      opacity: 0.95;
+      opacity: 0.97;
     }
 
-    .grid-item:hover img {
-      opacity: 1;
+    .grid-item:hover img { opacity: 1; }
+
+    /* ── Gallery Arrow Buttons ── */
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #ddd;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 22px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      line-height: 1;
+      padding: 0 0 2px;
+      opacity: 0;
+      transition: opacity 0.2s, background 0.2s;
+      pointer-events: none;
     }
+
+    .gallery-wrap:hover .gallery-btn { opacity: 1; pointer-events: auto; }
+    .gallery-btn:hover { background: #fff; }
+    .gallery-btn.gallery-prev { left: 12px; }
+    .gallery-btn.gallery-next { right: 12px; }
+    .gallery-btn[disabled] { opacity: 0 !important; pointer-events: none; }
 
     /* ── Lightbox ── */
     #lightbox {
@@ -250,12 +289,10 @@
     @media (max-width: 768px) {
       header { padding: 16px 20px; }
       .shooting-header { padding: 24px 20px 12px; }
-      .shooting-grid { grid-template-columns: repeat(2, 1fr); }
       nav { gap: 20px; }
     }
 
     @media (max-width: 480px) {
-      .shooting-grid { grid-template-columns: 1fr; }
       nav { display: none; }
     }
 
@@ -705,34 +742,33 @@
 <script>
   // ── Lazy-load fade-in ──────────────────────────────────────────────────────
   document.querySelectorAll('img').forEach(img => {
-    if (img.complete) {
-      img.classList.add('loaded');
-    } else {
-      img.addEventListener('load', () => img.classList.add('loaded'));
-    }
+    if (img.complete) img.classList.add('loaded');
+    else img.addEventListener('load', () => img.classList.add('loaded'));
   });
 
   // ── Lightbox ──────────────────────────────────────────────────────────────
   let currentImages = [];
   let currentIndex = 0;
+  let currentTitle = '';
 
   const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
+  const lbImg    = document.getElementById('lightbox-img');
   const lbCaption = document.getElementById('lightbox-caption');
 
   function openLightbox(images, index, title) {
     currentImages = images;
-    currentIndex = index;
-    showImage(title);
+    currentIndex  = index;
+    currentTitle  = title || '';
+    showLbImage();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
-  function showImage(title) {
+  function showLbImage() {
     lbImg.classList.remove('loaded');
     lbImg.src = currentImages[currentIndex];
     lbImg.onload = () => lbImg.classList.add('loaded');
-    lbCaption.textContent = (title || '') + ' · ' + (currentIndex + 1) + ' / ' + currentImages.length;
+    lbCaption.textContent = currentTitle + ' · ' + (currentIndex + 1) + ' / ' + currentImages.length;
   }
 
   function closeLightbox() {
@@ -741,37 +777,113 @@
   }
 
   document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-
   document.getElementById('lightbox-prev').addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    showImage(lbCaption.textContent.split(' · ')[0]);
+    showLbImage();
   });
-
   document.getElementById('lightbox-next').addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % currentImages.length;
-    showImage(lbCaption.textContent.split(' · ')[0]);
+    showLbImage();
   });
-
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') document.getElementById('lightbox-prev').click();
-    if (e.key === 'ArrowRight') document.getElementById('lightbox-next').click();
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   document.getElementById('lightbox-prev').click();
+    if (e.key === 'ArrowRight')  document.getElementById('lightbox-next').click();
   });
 
-  // ── Wire up grids ─────────────────────────────────────────────────────────
-  document.querySelectorAll('.shooting-grid').forEach(grid => {
-    const title = grid.dataset.title;
-    const items = grid.querySelectorAll('.grid-item img');
-    const srcs = Array.from(items).map(img => img.src);
+  // ── Gallery: wrap, arrows, height, lightbox ────────────────────────────────
+  document.querySelectorAll('.shooting').forEach(section => {
+    const openerImg = section.querySelector('.shooting-opener img');
+    const grid      = section.querySelector('.shooting-grid');
+    if (!grid) return;
 
+    // 1. Wrap grid in .gallery-wrap
+    const wrap = document.createElement('div');
+    wrap.className = 'gallery-wrap';
+    grid.parentNode.insertBefore(wrap, grid);
+    wrap.appendChild(grid);
+
+    // 2. Arrow buttons
+    const prev = document.createElement('button');
+    prev.className = 'gallery-btn gallery-prev';
+    prev.innerHTML = '&#8249;';
+    prev.setAttribute('aria-label', 'Zurück');
+
+    const next = document.createElement('button');
+    next.className = 'gallery-btn gallery-next';
+    next.innerHTML = '&#8250;';
+    next.setAttribute('aria-label', 'Weiter');
+
+    wrap.appendChild(prev);
+    wrap.appendChild(next);
+
+    // 3. Scroll on click
+    const scrollAmount = () => grid.clientWidth * 0.8;
+    prev.addEventListener('click', () => grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+    next.addEventListener('click', () => grid.scrollBy({ left:  scrollAmount(), behavior: 'smooth' }));
+
+    // 4. Update arrow disabled state
+    function updateArrows() {
+      prev.disabled = grid.scrollLeft <= 0;
+      next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 2;
+    }
+    grid.addEventListener('scroll', updateArrows, { passive: true });
+    updateArrows();
+
+    // 5. Set gallery image height = 72.5% of opener height
+    function applyHeight() {
+      if (!openerImg) return;
+      const h = openerImg.clientHeight * 0.725;
+      if (h < 10) return;
+      grid.querySelectorAll('.grid-item img').forEach(img => {
+        img.style.height = h + 'px';
+        img.style.width  = 'auto';
+      });
+      updateArrows();
+    }
+
+    if (openerImg) {
+      if (openerImg.complete && openerImg.naturalHeight > 0) applyHeight();
+      openerImg.addEventListener('load', applyHeight);
+    }
+
+    // 6. Wire lightbox
+    const title = grid.dataset.title || '';
+    const items = Array.from(grid.querySelectorAll('.grid-item img'));
+    const srcs  = items.map(img => img.src);
     items.forEach((img, i) => {
-      img.parentElement.addEventListener('click', () => {
-        openLightbox(srcs, i, title);
+      img.parentElement.addEventListener('click', () => openLightbox(srcs, i, title));
+    });
+  });
+
+  // Recalculate heights on resize
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.shooting').forEach(section => {
+      const openerImg = section.querySelector('.shooting-opener img');
+      const grid      = section.querySelector('.shooting-grid');
+      if (!openerImg || !grid) return;
+      const h = openerImg.clientHeight * 0.725;
+      if (h < 10) return;
+      grid.querySelectorAll('.grid-item img').forEach(img => {
+        img.style.height = h + 'px';
+        img.style.width  = 'auto';
+      });
+    });
+  });
+
+  // Fallback: recalculate after full page load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.shooting').forEach(section => {
+      const openerImg = section.querySelector('.shooting-opener img');
+      const grid      = section.querySelector('.shooting-grid');
+      if (!openerImg || !grid) return;
+      const h = openerImg.clientHeight * 0.725;
+      if (h < 10) return;
+      grid.querySelectorAll('.grid-item img').forEach(img => {
+        img.style.height = h + 'px';
+        img.style.width  = 'auto';
       });
     });
   });
