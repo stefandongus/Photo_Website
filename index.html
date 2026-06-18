@@ -296,6 +296,30 @@
       nav { display: none; }
     }
 
+    /* ── Hero Video ── */
+    .hero-video {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .hero-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Section Video ── */
+    .shooting-video {
+      width: 100%;
+      margin-top: var(--gap);
+      line-height: 0;
+    }
+    .shooting-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* ── Lazy loading fade-in ── */
     img { opacity: 0; transition: opacity 0.4s ease; }
     img.loaded { opacity: 1; }
@@ -315,6 +339,13 @@
 </header>
 
 <main id="top">
+
+  <!-- ── Hero Video ── -->
+  <div class="hero-video">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="https://static1.squarespace.com/static/6814bb161f475e1800f0243d/t/0a035529-cfdb-400f-be7e-82c56c926f3c/858/copy_7A20736A-CF08-4AD0-A067-71ADFC416FB6.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <!-- ── Shooting 01: Lunor Cover Shoot #45 ── -->
   <section class="shooting" id="shooting-01">
@@ -476,6 +507,11 @@
       <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4169_com2.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4190_com1.jpg" alt="" loading="lazy"></div>
     </div>
+    <div class="shooting-video">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="https://static1.squarespace.com/static/6814bb161f475e1800f0243d/t/b476cf1c-2b6a-4ea4-8b94-9d1b4e7b1f3c/880/Short%20version.mp4" type="video/mp4">
+      </video>
+    </div>
   </section>
 
   <!-- ── Shooting 09: Crafted Spaces with LINDBERG Precious ── -->
@@ -571,10 +607,7 @@
     <div class="shooting-header">
       <div class="shooting-title">Wigged Out, Red Beauty</div>
     </div>
-    <div class="shooting-opener">
-      <img src="images/13_Wigged_Out_Red_Beauty/opener.jpg" alt="Wigged Out Red Beauty Opener" loading="lazy">
-    </div>
-    <div class="shooting-grid" data-shooting="13_Wigged_Out_Red_Beauty" data-title="Wigged Out, Red Beauty">
+    <div class="shooting-grid" data-shooting="13_Wigged_Out_Red_Beauty" data-title="Wigged Out, Red Beauty" data-hero-gallery="true">
       <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4574.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4619.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4894.jpg" alt="" loading="lazy"></div>
@@ -591,7 +624,10 @@
     <div class="shooting-header">
       <div class="shooting-title">Through LINDBERG — The Edit of Clarity</div>
     </div>
-    <div class="shooting-grid" data-shooting="14_Through_LINDBERG_Edit_of_Clarity" data-title="Through LINDBERG — The Edit of Clarity" data-hero-gallery="true">
+    <div class="shooting-opener">
+      <img src="images/14_Through_LINDBERG_Edit_of_Clarity/opener.jpg" alt="Through LINDBERG Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="14_Through_LINDBERG_Edit_of_Clarity" data-title="Through LINDBERG — The Edit of Clarity">
       <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv01_DSC5878.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv04_DSC6098.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv02_DSC5916.jpg" alt="" loading="lazy"></div>
@@ -616,6 +652,11 @@
       <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC2018.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC2063.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC2105.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="shooting-video">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="https://static1.squarespace.com/static/6814bb161f475e1800f0243d/t/809c5d58-882e-4b73-92b2-b5c5494cb65d/858/copy_A5C7E020-3B52-40E0-9F2E-429E50D307E7.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
@@ -698,6 +739,163 @@
       <div class="grid-item"><img src="images/16_The_Inner_Circle_of_Eyewear/0-Tom-Herrington---Rock-Optika.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/16_The_Inner_Circle_of_Eyewear/0-Wolfgang-Reckzeh-DSC_6866-Bearbeitet.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/16_The_Inner_Circle_of_Eyewear/0-Wolfgang-Thelen---Maybach.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 17: Porsche Design Lighthouse ── -->
+  <section class="shooting" id="shooting-17">
+    <div class="shooting-header">
+      <div class="shooting-title">Porsche Design Lighthouse</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/17_Porsche_Design_Lighthouse/opener.jpg" alt="Porsche Design Lighthouse Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="17_Porsche_Design_Lighthouse" data-title="Porsche Design Lighthouse">
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-980.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-949.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-1014-Kopie-SDO-Test.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-1022.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-1079.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-1083.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/17_Porsche_Design_Lighthouse/echt-1149.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 18: Chez "Blitz" — Paris Workshop Attitude ── -->
+  <section class="shooting" id="shooting-18">
+    <div class="shooting-header">
+      <div class="shooting-title">Chez &#8220;Blitz&#8221; — Paris Workshop Attitude</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/18_Chez_Blitz_Paris_Workshop/opener.jpg" alt="Chez Blitz Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="18_Chez_Blitz_Paris_Workshop" data-title="Chez &quot;Blitz&quot; — Paris Workshop Attitude">
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7082.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7114.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7167.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7194.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7252.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7063.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7219.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7036.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 19: Mixed Snacks ── -->
+  <section class="shooting" id="shooting-19">
+    <div class="shooting-header">
+      <div class="shooting-title">Mixed Snacks</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/19_Mixed_Snacks/opener.jpg" alt="Mixed Snacks Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="19_Mixed_Snacks" data-title="Mixed Snacks">
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/_DSC3921.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/_DSC9544_02_korr.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/DSC_6843-Bearbeitet.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1_DSC_4504.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/Salt_DSC1131.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/2_DSC_4817.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/0_DSC_4249_Cazal.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/Hannah-DSC_0197-Bearbeitet.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/2_DSC_4862.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1-Polo-Ralph-Lauren-PH-3075-Bearbeitet.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/_Shuhan-2875.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/0_DSC0879.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1-DSC_6283_RET.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1-Seite-06-neu-1593.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/Capture0113.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1-DSC_6621-Bearbeitet.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1-ic-warrior-258-Bearbeitet.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/Kilian-DSC_0346.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/_Cutler-And-Gross-A-1174.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/1_DSC_4711.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/19_Mixed_Snacks/_Eyevan766.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 20: LINDBERG captured in Charlottenburg ── -->
+  <section class="shooting" id="shooting-20">
+    <div class="shooting-header">
+      <div class="shooting-title">LINDBERG captured in Charlottenburg</div>
+    </div>
+    <div class="shooting-grid" data-shooting="20_LINDBERG_Charlottenburg" data-title="LINDBERG captured in Charlottenburg" data-hero-gallery="true">
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC5428.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC4416.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC4600.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC4985.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC5115.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC5163.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/20_LINDBERG_Charlottenburg/_DSC5227.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 21: Cape Town Mansion ── -->
+  <section class="shooting" id="shooting-21">
+    <div class="shooting-header">
+      <div class="shooting-title">Cape Town Mansion</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/21_Cape_Town_Mansion/opener.jpg" alt="Cape Town Mansion Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="21_Cape_Town_Mansion" data-title="Cape Town Mansion">
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0103.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0855.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0423.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0920.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0146.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0543.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0977.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0725.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC1070.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC1087.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 22: Neo Realities ── -->
+  <section class="shooting" id="shooting-22">
+    <div class="shooting-header">
+      <div class="shooting-title">Neo Realities</div>
+    </div>
+    <div class="shooting-grid" data-shooting="22_Neo_Realities" data-title="Neo Realities" data-hero-gallery="true">
+      <div class="grid-item"><img src="images/22_Neo_Realities/2c35d837872573.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/22_Neo_Realities/800e5237872573.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/22_Neo_Realities/34759b37872573.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/22_Neo_Realities/08513837872573.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 23: Volumes of Light ── -->
+  <section class="shooting" id="shooting-23">
+    <div class="shooting-header">
+      <div class="shooting-title">Volumes of Light</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/23_Volumes_of_Light/opener.jpg" alt="Volumes of Light Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="23_Volumes_of_Light" data-title="Volumes of Light">
+      <div class="grid-item"><img src="images/23_Volumes_of_Light/ECO-MODO-0481.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/23_Volumes_of_Light/L.A.EYEWORKS-Seite1-0101.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/23_Volumes_of_Light/HAFFMANS-NEUMEISTER-0886.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/23_Volumes_of_Light/HAFFMANS-NEUMEISTER-0964.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/23_Volumes_of_Light/IC-BERLIN-Seite8-9970.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/23_Volumes_of_Light/RAY_BAN-0599.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 24: Driven by Detail — Refined Legacy by Maybach Eyewear ── -->
+  <section class="shooting" id="shooting-24">
+    <div class="shooting-header">
+      <div class="shooting-title">Driven by Detail — Refined Legacy by Maybach Eyewear</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/24_Driven_by_Detail_Maybach/opener.jpg" alt="Driven by Detail Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="24_Driven_by_Detail_Maybach" data-title="Driven by Detail — Refined Legacy by Maybach Eyewear">
+      <div class="grid-item"><img src="images/24_Driven_by_Detail_Maybach/maybach101184_final.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/24_Driven_by_Detail_Maybach/maybach110854_final.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/24_Driven_by_Detail_Maybach/new-maybach091147_final.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/24_Driven_by_Detail_Maybach/maybach120881_final.jpg" alt="" loading="lazy"></div>
     </div>
   </section>
 
