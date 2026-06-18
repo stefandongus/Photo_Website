@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stefan Dongus Photography</title>
+  <meta name="description" content="Stefan Dongus Photography based in Köln Cologne, spezialisiert auf Fashion und People insbesondere Brillen / Eyewear. Studio und On-Location.">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f0f0f0;
+      --accent: #ffffff;
+      --muted: #888;
+      --gap: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Header ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 11px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── Main ── */
+    main {
+      padding-top: 70px;
+    }
+
+    /* ── Shooting Sections ── */
+    .shooting {
+      margin-bottom: 80px;
+    }
+
+    .shooting-header {
+      padding: 32px 32px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .shooting-title {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .shooting-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Opener / Hero Image ── */
+    .shooting-opener {
+      width: 100%;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+      margin-bottom: var(--gap);
+    }
+
+    .shooting-opener img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .shooting-opener:hover img {
+      transform: scale(1.02);
+    }
+
+    /* ── Grid ── */
+    .shooting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--gap);
+      padding: 0;
+    }
+
+    .grid-item {
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, opacity 0.3s ease;
+      opacity: 0.95;
+    }
+
+    .grid-item:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.active {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--fg);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    #lightbox-close:hover { opacity: 1; }
+
+    #lightbox-prev, #lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--fg);
+      font-size: 36px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+      padding: 20px;
+    }
+
+    #lightbox-prev { left: 12px; }
+    #lightbox-next { right: 12px; }
+    #lightbox-prev:hover, #lightbox-next:hover { opacity: 1; }
+
+    #lightbox-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── Contact Section ── */
+    #contact {
+      padding: 80px 32px;
+      border-top: 1px solid #222;
+      max-width: 600px;
+    }
+
+    #contact h2 {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--accent);
+    }
+
+    #contact p {
+      color: var(--muted);
+      line-height: 2;
+      letter-spacing: 0.05em;
+    }
+
+    #contact a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+
+    #contact a:hover { border-color: var(--fg); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 32px;
+      color: #333;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      border-top: 1px solid #111;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: 16px 20px; }
+      .shooting-header { padding: 24px 20px 12px; }
+      .shooting-grid { grid-template-columns: repeat(2, 1fr); }
+      nav { gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .shooting-grid { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+
+    /* ── Lazy loading fade-in ── */
+    img { opacity: 0; transition: opacity 0.4s ease; }
+    img.loaded { opacity: 1; }
+    .grid-item img.loaded { opacity: 0.95; }
+    .grid-item:hover img.loaded { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top">Stefan Dongus Photography</a>
+  <nav>
+    <a href="https://www.spectr-magazine.com" target="_blank">SPECTR</a>
+    <a href="https://www.favrspecs.com" target="_blank">FAVR</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ── Shooting 01: Lunor Cover Shoot #45 ── -->
+  <section class="shooting" id="shooting-01">
+    <div class="shooting-header">
+      <div class="shooting-title">Lunor Cover Shoot #45</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/01_Lunor_Cover_Shoot_45/opener.jpg" alt="Lunor Cover Shoot #45 Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="01_Lunor_Cover_Shoot_45" data-title="Lunor Cover Shoot #45">
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0025-1990-1_edit.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/A5-603_1-021-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0001-1914-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Lunor-1923_exposure_down.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Lunor-Mod-1-625-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0009-2093-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0047-2082-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Lunor-Mod-4-919-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Lunor-Mod-3-842-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0043-2127-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0092-1567-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Capture0110-1724-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Lunor-Mod-4-859-1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/01_Lunor_Cover_Shoot_45/Lunor-1923-1.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 02: The Sedcard ── -->
+  <section class="shooting" id="shooting-02">
+    <div class="shooting-header">
+      <div class="shooting-title">The Sedcard</div>
+      <div class="shooting-subtitle">Barton Perreira · Blackfin · Cazal · Masunaga · Maybach Eyewear</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/02_The_Sedcard/opener.jpg" alt="The Sedcard Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="02_The_Sedcard" data-title="The Sedcard">
+      <div class="grid-item"><img src="images/02_The_Sedcard/Capture0068-1205.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/02_The_Sedcard/Compose.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/02_The_Sedcard/Capture0010-915.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/02_The_Sedcard/Capture0042-858-New.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/02_The_Sedcard/Capture0086-1137.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 03: IC! BERLIN X AMG ── -->
+  <section class="shooting" id="shooting-03">
+    <div class="shooting-header">
+      <div class="shooting-title">IC! BERLIN X AMG</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/03_IC_Berlin_X_AMG/opener.jpg" alt="IC! BERLIN X AMG Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="03_IC_Berlin_X_AMG" data-title="IC! BERLIN X AMG">
+      <div class="grid-item"><img src="images/03_IC_Berlin_X_AMG/dsc_7399.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/03_IC_Berlin_X_AMG/dsc06276.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/03_IC_Berlin_X_AMG/dsc_7639.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/03_IC_Berlin_X_AMG/dsc_7403.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/03_IC_Berlin_X_AMG/dsc_7966.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/03_IC_Berlin_X_AMG/dsc_7981.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 04: Look Twice First ── -->
+  <section class="shooting" id="shooting-04">
+    <div class="shooting-header">
+      <div class="shooting-title">Look Twice First</div>
+      <div class="shooting-subtitle">Barton Perreira · Götti · Nirvan Javan · Silhouette · You Mawo · Blackfin · Anne & Valentin</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/04_Look_Twice_First/opener.jpg" alt="Look Twice First Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="04_Look_Twice_First" data-title="Look Twice First">
+      <div class="grid-item"><img src="images/04_Look_Twice_First/1-small.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/Capture0002-430.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/2-small.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/Capture0005-564.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/3-small.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/Capture0022-531-New.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/Capture0007-505.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/04_Look_Twice_First/Capture0034-497.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 05: The Space Between ── -->
+  <section class="shooting" id="shooting-05">
+    <div class="shooting-header">
+      <div class="shooting-title">The Space Between — LINDBERG @ Langen Foundation</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/opener.jpg" alt="The Space Between Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="05_The_Space_Between_LINDBERG_Langen_Foundation" data-title="The Space Between — LINDBERG @ Langen Foundation">
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_8920_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9011_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_8943_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9240_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9447_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9419_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9834_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9474_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9883_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9823_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/05_The_Space_Between_LINDBERG_Langen_Foundation/DSC_9896_com01.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 06: Face Forward with Plus Eyewear ── -->
+  <section class="shooting" id="shooting-06">
+    <div class="shooting-header">
+      <div class="shooting-title">Face Forward with Plus Eyewear</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/06_Face_Forward_Plus_Eyewear/opener.jpg" alt="Face Forward Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="06_Face_Forward_Plus_Eyewear" data-title="Face Forward with Plus Eyewear">
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC4195.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC4790.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC5128.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC5178.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC5197.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC5209.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/06_Face_Forward_Plus_Eyewear/_DSC4091.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 07: Reflected Realities with LINDBERG ── -->
+  <section class="shooting" id="shooting-07">
+    <div class="shooting-header">
+      <div class="shooting-title">Reflected Realities with LINDBERG</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/07_Reflected_Realities_LINDBERG/opener.jpg" alt="Reflected Realities Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="07_Reflected_Realities_LINDBERG" data-title="Reflected Realities with LINDBERG">
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9015.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9050.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9061.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9186.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9234.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9430.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/07_Reflected_Realities_LINDBERG/_DSC9533.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 08: Framed Identity ── -->
+  <section class="shooting" id="shooting-08">
+    <div class="shooting-header">
+      <div class="shooting-title">Framed Identity</div>
+      <div class="shooting-subtitle">Thierry Lasry · GLCO · Eyevan · Sunday Somewhere · Ahlem · Willems · Mykita</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/08_Framed_Identity/opener.jpg" alt="Framed Identity Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="08_Framed_Identity" data-title="Framed Identity">
+      <div class="grid-item"><img src="images/08_Framed_Identity/1_DSC_3901_com2.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4012_com1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4050_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4074_com1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4119_com1.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4088_com01.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4169_com2.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/08_Framed_Identity/DSC_4190_com1.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 09: Crafted Spaces with LINDBERG Precious ── -->
+  <section class="shooting" id="shooting-09">
+    <div class="shooting-header">
+      <div class="shooting-title">Crafted Spaces with LINDBERG Precious</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/09_Crafted_Spaces_LINDBERG_Precious/opener.jpg" alt="Crafted Spaces Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="09_Crafted_Spaces_LINDBERG_Precious" data-title="Crafted Spaces with LINDBERG Precious">
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-3851.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-4105.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-4473.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-4213.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-4523.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-4586.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/09_Crafted_Spaces_LINDBERG_Precious/unbenannt-4548.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 10: The Global Edit ── -->
+  <section class="shooting" id="shooting-10">
+    <div class="shooting-header">
+      <div class="shooting-title">The Global Edit — Mixed Faces of Now</div>
+    </div>
+    <div class="shooting-grid" data-shooting="10_The_Global_Edit_Mixed_Faces" data-title="The Global Edit — Mixed Faces of Now">
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_921.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_3272.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_DSC4774.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_2846.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_3056.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_DSC4300.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_3392.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/DSC_3619.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_DSC5935.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/Fleye_DSC1279.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_DSC4498.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_DSC7508.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/Hoffmann_DSC6786.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/1_DSC7809.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/Basti-Capture0136.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/1_DSC9679_bea.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/Finn-EYEWEAR_DSC7166.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/0_DSC_4292_Goetti.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_Square-Paul-1731.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/10_The_Global_Edit_Mixed_Faces/_Square-Shuhan-1809.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 11: Exhibit Blackfin ── -->
+  <section class="shooting" id="shooting-11">
+    <div class="shooting-header">
+      <div class="shooting-title">Exhibit Blackfin — Titanium Statements in Silence</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/11_Exhibit_Blackfin_Titanium/opener.jpg" alt="Exhibit Blackfin Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="11_Exhibit_Blackfin_Titanium" data-title="Exhibit Blackfin — Titanium Statements in Silence">
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7343.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7632.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7753.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7469.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7700.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7572.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7610.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/11_Exhibit_Blackfin_Titanium/_DSC7381.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 12: The. Light.Touch.LINDBERG ── -->
+  <section class="shooting" id="shooting-12">
+    <div class="shooting-header">
+      <div class="shooting-title">The. Light.Touch.LINDBERG</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/12_The_Light_Touch_LINDBERG/opener.jpg" alt="The Light Touch LINDBERG Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="12_The_Light_Touch_LINDBERG" data-title="The. Light.Touch.LINDBERG">
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-6721.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-7244.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-6770.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-6845.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-7082.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-7019.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-7351.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/12_The_Light_Touch_LINDBERG/Lindberg_-7196.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 13: Wigged Out, Red Beauty ── -->
+  <section class="shooting" id="shooting-13">
+    <div class="shooting-header">
+      <div class="shooting-title">Wigged Out, Red Beauty</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/13_Wigged_Out_Red_Beauty/opener.jpg" alt="Wigged Out Red Beauty Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="13_Wigged_Out_Red_Beauty" data-title="Wigged Out, Red Beauty">
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4574.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4619.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4894.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/1_DSC_4733.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/2_DSC_4599.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/2_DSC_4887.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/2_DSC_4755.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/13_Wigged_Out_Red_Beauty/2_DSC_4907.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 14: Through LINDBERG ── -->
+  <section class="shooting" id="shooting-14">
+    <div class="shooting-header">
+      <div class="shooting-title">Through LINDBERG — The Edit of Clarity</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/14_Through_LINDBERG_Edit_of_Clarity/opener.jpg" alt="Through LINDBERG Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="14_Through_LINDBERG_Edit_of_Clarity" data-title="Through LINDBERG — The Edit of Clarity">
+      <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv01_DSC5878.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv04_DSC6098.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv02_DSC5916.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv06_DSC6274.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv09_DSC6578.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/14_Through_LINDBERG_Edit_of_Clarity/Motiv10_DSC6702.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Shooting 15: Sea Level Styles from Muizenberg ── -->
+  <section class="shooting" id="shooting-15">
+    <div class="shooting-header">
+      <div class="shooting-title">Sea Level Styles from Muizenberg</div>
+    </div>
+    <div class="shooting-opener">
+      <img src="images/15_Sea_Level_Styles_Muizenberg/opener.jpg" alt="Sea Level Styles Opener" loading="lazy">
+    </div>
+    <div class="shooting-grid" data-shooting="15_Sea_Level_Styles_Muizenberg" data-title="Sea Level Styles from Muizenberg">
+      <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC1762.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC1898.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC1982.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC2018.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC2063.jpg" alt="" loading="lazy"></div>
+      <div class="grid-item"><img src="images/15_Sea_Level_Styles_Muizenberg/SPECTR_RGB_DSC2105.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      Stefan Dongus Photography<br>
+      Köln · Cologne<br>
+      <br>
+      Fashion &amp; People · Eyewear &amp; Brillen<br>
+      Studio &amp; On-Location<br>
+      <br>
+      <a href="mailto:stefan@dongus.net">stefan@dongus.net</a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  © Stefan Dongus Photography · Köln
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button id="lightbox-close">×</button>
+  <button id="lightbox-prev">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next">›</button>
+  <div id="lightbox-caption"></div>
+</div>
+
+<script>
+  // ── Lazy-load fade-in ──────────────────────────────────────────────────────
+  document.querySelectorAll('img').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+    }
+  });
+
+  // ── Lightbox ──────────────────────────────────────────────────────────────
+  let currentImages = [];
+  let currentIndex = 0;
+
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCaption = document.getElementById('lightbox-caption');
+
+  function openLightbox(images, index, title) {
+    currentImages = images;
+    currentIndex = index;
+    showImage(title);
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showImage(title) {
+    lbImg.classList.remove('loaded');
+    lbImg.src = currentImages[currentIndex];
+    lbImg.onload = () => lbImg.classList.add('loaded');
+    lbCaption.textContent = (title || '') + ' · ' + (currentIndex + 1) + ' / ' + currentImages.length;
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+
+  document.getElementById('lightbox-prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    showImage(lbCaption.textContent.split(' · ')[0]);
+  });
+
+  document.getElementById('lightbox-next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    showImage(lbCaption.textContent.split(' · ')[0]);
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') document.getElementById('lightbox-prev').click();
+    if (e.key === 'ArrowRight') document.getElementById('lightbox-next').click();
+  });
+
+  // ── Wire up grids ─────────────────────────────────────────────────────────
+  document.querySelectorAll('.shooting-grid').forEach(grid => {
+    const title = grid.dataset.title;
+    const items = grid.querySelectorAll('.grid-item img');
+    const srcs = Array.from(items).map(img => img.src);
+
+    items.forEach((img, i) => {
+      img.parentElement.addEventListener('click', () => {
+        openLightbox(srcs, i, title);
+      });
+    });
+  });
+</script>
+</body>
+</html>
