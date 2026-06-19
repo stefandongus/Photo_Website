@@ -145,6 +145,12 @@
       opacity: 0.97;
     }
 
+    /* Hero-gallery sections: CSS fallback height before JS kicks in.
+       Without this, lazy images have 0 intrinsic size → grid collapses. */
+    .shooting-grid[data-hero-gallery] .grid-item img {
+      height: 75vh;
+    }
+
     .grid-item:hover img { opacity: 1; }
 
     /* ── Gallery Arrow Buttons ── */
