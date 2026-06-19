@@ -166,13 +166,13 @@
       color: #333;
       line-height: 1;
       padding: 0 0 2px;
-      opacity: 0;
+      opacity: 0.35;
       transition: opacity 0.2s, background 0.2s;
-      pointer-events: none;
+      pointer-events: auto;
     }
 
-    .gallery-wrap:hover .gallery-btn { opacity: 1; pointer-events: auto; }
-    .gallery-btn:hover { background: #fff; }
+    .gallery-wrap:hover .gallery-btn { opacity: 0.85; }
+    .gallery-btn:hover { background: #fff; opacity: 1 !important; }
     .gallery-btn.gallery-prev { left: 12px; }
     .gallery-btn.gallery-next { right: 12px; }
     .gallery-btn[disabled] { opacity: 0 !important; pointer-events: none; }
@@ -202,14 +202,15 @@
     #lightbox-close {
       position: absolute;
       top: 20px; right: 28px;
-      font-size: 28px;
+      font-size: 32px;
       cursor: pointer;
-      color: var(--fg);
-      opacity: 0.7;
+      color: #ffffff;
+      opacity: 0.8;
       transition: opacity 0.2s;
       background: none;
       border: none;
       line-height: 1;
+      z-index: 1001;
     }
 
     #lightbox-close:hover { opacity: 1; }
@@ -220,12 +221,13 @@
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: var(--fg);
-      font-size: 36px;
+      color: #ffffff;
+      font-size: 48px;
       cursor: pointer;
-      opacity: 0.5;
+      opacity: 0.6;
       transition: opacity 0.2s;
       padding: 20px;
+      z-index: 1001;
     }
 
     #lightbox-prev { left: 12px; }
@@ -237,7 +239,7 @@
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      color: var(--muted);
+      color: rgba(255,255,255,0.5);
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -278,11 +280,138 @@
 
     /* ── Footer ── */
     footer {
-      padding: 32px;
-      color: #999;
-      font-size: 11px;
-      letter-spacing: 0.08em;
+      padding: 60px 48px 48px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.7;
       border-top: 1px solid #e8e8e8;
+      background: #fafafa;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #333;
+      margin: 0 0 14px;
+    }
+
+    .footer-section p {
+      margin: 0 0 10px;
+      color: #666;
+      font-size: 12px;
+    }
+
+    .footer-section a {
+      color: #555;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .footer-section a:hover { border-bottom-color: #333; color: #111; }
+
+    .footer-divider {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 0 auto 32px;
+      max-width: 1100px;
+    }
+
+    .footer-legal {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-legal details {
+      border-top: 1px solid #e8e8e8;
+      padding: 14px 0;
+    }
+
+    .footer-legal details:last-child {
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .footer-legal summary {
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #444;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-legal summary::after {
+      content: '+';
+      font-size: 16px;
+      font-weight: 300;
+      margin-left: auto;
+      transition: transform 0.2s;
+    }
+
+    .footer-legal details[open] summary::after { content: '−'; }
+
+    .footer-legal .legal-content {
+      padding: 20px 0 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-legal .legal-content h4 {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #555;
+      margin: 0 0 10px;
+    }
+
+    .footer-legal .legal-content p {
+      color: #777;
+      font-size: 11px;
+      line-height: 1.75;
+      margin: 0 0 10px;
+    }
+
+    .footer-legal .legal-content ol {
+      color: #777;
+      font-size: 11px;
+      line-height: 1.75;
+      padding-left: 18px;
+      margin: 0 0 10px;
+    }
+
+    .footer-legal .legal-content a {
+      color: #666;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #bbb;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-legal .legal-content { grid-template-columns: 1fr; }
+      footer { padding: 40px 24px 32px; }
     }
 
     /* ── Responsive ── */
@@ -766,10 +895,7 @@
     <div class="shooting-header">
       <div class="shooting-title">Chez &#8220;Blitz&#8221; — Paris Workshop Attitude</div>
     </div>
-    <div class="shooting-opener">
-      <img src="images/18_Chez_Blitz_Paris_Workshop/opener.jpg" alt="Chez Blitz Opener" loading="lazy">
-    </div>
-    <div class="shooting-grid" data-shooting="18_Chez_Blitz_Paris_Workshop" data-title="Chez &quot;Blitz&quot; — Paris Workshop Attitude">
+    <div class="shooting-grid" data-shooting="18_Chez_Blitz_Paris_Workshop" data-title="Chez &quot;Blitz&quot; — Paris Workshop Attitude" data-hero-gallery="true">
       <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7082.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7114.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/18_Chez_Blitz_Paris_Workshop/MOTORCYCLE_BLITZ_DSC7167.jpg" alt="" loading="lazy"></div>
@@ -835,10 +961,7 @@
     <div class="shooting-header">
       <div class="shooting-title">Cape Town Mansion</div>
     </div>
-    <div class="shooting-opener">
-      <img src="images/21_Cape_Town_Mansion/opener.jpg" alt="Cape Town Mansion Opener" loading="lazy">
-    </div>
-    <div class="shooting-grid" data-shooting="21_Cape_Town_Mansion" data-title="Cape Town Mansion">
+    <div class="shooting-grid" data-shooting="21_Cape_Town_Mansion" data-title="Cape Town Mansion" data-hero-gallery="true">
       <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0103.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0855.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/21_Cape_Town_Mansion/_DSC0423.jpg" alt="" loading="lazy"></div>
@@ -870,10 +993,7 @@
     <div class="shooting-header">
       <div class="shooting-title">Volumes of Light</div>
     </div>
-    <div class="shooting-opener">
-      <img src="images/23_Volumes_of_Light/opener.jpg" alt="Volumes of Light Opener" loading="lazy">
-    </div>
-    <div class="shooting-grid" data-shooting="23_Volumes_of_Light" data-title="Volumes of Light">
+    <div class="shooting-grid" data-shooting="23_Volumes_of_Light" data-title="Volumes of Light" data-hero-gallery="true">
       <div class="grid-item"><img src="images/23_Volumes_of_Light/ECO-MODO-0481.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/23_Volumes_of_Light/L.A.EYEWORKS-Seite1-0101.jpg" alt="" loading="lazy"></div>
       <div class="grid-item"><img src="images/23_Volumes_of_Light/HAFFMANS-NEUMEISTER-0886.jpg" alt="" loading="lazy"></div>
@@ -916,7 +1036,98 @@
 </main>
 
 <footer>
-  © Stefan Dongus Photography · Köln
+  <div class="footer-grid">
+    <div class="footer-section">
+      <h3>Impressum / Imprint</h3>
+      <p>Stefan Dongus<br>
+      c/o SPECTR Magazine<br>
+      Kamekestr. 20–22<br>
+      50672 Köln</p>
+      <p><a href="mailto:stefan@dongus.net">stefan@dongus.net</a><br>
+      +49 (0)151 14271817</p>
+      <p>USt Ident-Nummer: DE269208534</p>
+    </div>
+    <div class="footer-section">
+      <h3>Kontakt / Contact</h3>
+      <p>Für Anfragen zu Shootings, Lizenzen oder Kooperationen.</p>
+      <p>For inquiries regarding shootings, licensing or collaborations.</p>
+      <p><a href="mailto:stefan@dongus.net">stefan@dongus.net</a></p>
+    </div>
+    <div class="footer-section">
+      <h3>Stefan Dongus Photography</h3>
+      <p>Eyewear &amp; Editorial Photography<br>
+      Köln · Berlin · International</p>
+      <p>© 2025 Stefan Dongus.<br>Alle Rechte vorbehalten.</p>
+    </div>
+  </div>
+
+  <hr class="footer-divider">
+
+  <div class="footer-legal">
+
+    <details>
+      <summary>Copyright / Urheberrecht</summary>
+      <div class="legal-content">
+        <div>
+          <h4>Copyright Notice</h4>
+          <p>© 2025. www.stefandongus.com. All rights reserved.</p>
+          <p>All contents of this website (texts, images, graphics, videos, designs, etc.) are subject to German copyright law and — unless otherwise stated — are the property of Stefan Dongus. Duplication, processing, distribution or any other form of commercialization of such material beyond the scope of the copyright law shall require the prior written consent of its respective author or creator.</p>
+          <p>If content on this website was not created by the operator, the copyrights of third parties are respected and the corresponding sources are indicated. If you nevertheless discover a copyright infringement, please inform us accordingly. If we become aware of any infringements, such content will be removed immediately.</p>
+        </div>
+        <div>
+          <h4>Urheberrechtshinweis</h4>
+          <p>© 2025. www.stefandongus.com. Alle Rechte vorbehalten.</p>
+          <p>Alle Inhalte dieser Website (Texte, Bilder, Grafiken, Videos, Designs etc.) unterliegen dem deutschen Urheberrecht und sind – sofern nicht anders angegeben – Eigentum von Stefan Dongus. Eine Vervielfältigung, Bearbeitung, Verbreitung oder jede andere Art der Verwertung außerhalb der Grenzen des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung des Rechteinhabers.</p>
+          <p>Sollten Inhalte auf dieser Website nicht vom Betreiber erstellt worden sein, werden die Urheberrechte Dritter beachtet und entsprechende Quellen angegeben. Falls du dennoch eine Urheberrechtsverletzung feststellst, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden derartige Inhalte umgehend entfernt.</p>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Privacy Policy / Datenschutzerklärung</summary>
+      <div class="legal-content">
+        <div>
+          <h4>Privacy Policy</h4>
+          <p><strong>Effective as of: May 16, 2025</strong></p>
+          <p>The protection of your personal data is very important to me. I process your data solely in accordance with legal requirements (GDPR, TMG). In this privacy policy, I inform you about how your data is processed on this website.</p>
+          <p><strong>1. Controller</strong><br>
+          Stefan Dongus · Kirchberger Str. 17 · 50935 Köln · <a href="mailto:stefan@dongus.net">stefan@dongus.net</a></p>
+          <p><strong>2. Hosting via Cloudflare</strong><br>
+          This website is hosted by Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA. Cloudflare stores data (such as IP address, timestamp, browser information) to provide and ensure the security and performance of the website. Data processing is based on Art. 6(1)(f) GDPR (legitimate interest in a secure and stable website). For more information: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></p>
+          <p><strong>3. Access Data / Server Log Files</strong><br>
+          When you visit this website, the web server automatically stores certain information, including IP address, date and time of access, visited pages, and browser type. This data is used solely for technical troubleshooting and website security.</p>
+          <p><strong>4. Cookies</strong><br>
+          This website uses only technically necessary cookies. No marketing or tracking cookies are used.</p>
+          <p><strong>5. Contacting Me</strong><br>
+          If you contact me via email or phone, I will store your data to process your inquiry. Your data will not be shared without your consent. Legal basis: Art. 6(1)(b) GDPR.</p>
+          <p><strong>6. Your Rights</strong><br>
+          You have the right to access, correct, delete, restrict, or port your personal data, and to lodge a complaint with the BfDI: <a href="https://www.bfdi.bund.de" target="_blank" rel="noopener">bfdi.bund.de</a></p>
+        </div>
+        <div>
+          <h4>Datenschutzerklärung</h4>
+          <p><strong>Gültig ab: 16. Mai 2025</strong></p>
+          <p>Der Schutz Ihrer persönlichen Daten ist mir ein wichtiges Anliegen. Ich verarbeite Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TMG). In dieser Datenschutzerklärung informiere ich Sie darüber, wie Ihre Daten auf dieser Website verarbeitet werden.</p>
+          <p><strong>1. Verantwortlicher</strong><br>
+          Stefan Dongus · Kirchberger Str. 17 · 50935 Köln · <a href="mailto:stefan@dongus.net">stefan@dongus.net</a></p>
+          <p><strong>2. Hosting über Cloudflare</strong><br>
+          Diese Website wird über Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA gehostet. Cloudflare speichert Daten (wie IP-Adresse, Zeitstempel, Browserinformationen), um die Sicherheit und Funktionalität der Website zu gewährleisten. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></p>
+          <p><strong>3. Zugriffsdaten / Server-Logfiles</strong><br>
+          Beim Besuch dieser Website speichert der Webserver automatisch Informationen wie IP-Adresse, Datum und Uhrzeit, besuchte Seiten und Browsertyp. Diese Daten dienen ausschließlich der technischen Fehleranalyse und der Sicherheit.</p>
+          <p><strong>4. Cookies</strong><br>
+          Diese Website verwendet ausschließlich technisch notwendige Cookies. Es werden keine Marketing- oder Tracking-Cookies verwendet.</p>
+          <p><strong>5. Kontaktaufnahme</strong><br>
+          Wenn Sie per E-Mail oder Telefon Kontakt aufnehmen, speichere ich Ihre Angaben zur Bearbeitung Ihrer Anfrage. Ihre Daten werden ohne Ihre Einwilligung nicht an Dritte weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
+          <p><strong>6. Ihre Rechte</strong><br>
+          Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Beschwerde bei der BfDI: <a href="https://www.bfdi.bund.de" target="_blank" rel="noopener">bfdi.bund.de</a></p>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 Stefan Dongus Photography · Köln
+  </div>
 </footer>
 
 <!-- Lightbox -->
@@ -1054,12 +1265,18 @@
     document.querySelectorAll('.shooting-opener img').forEach(img => {
       if (img.clientHeight > 10) heights.push(img.clientHeight);
     });
-    if (heights.length === 0) return;
-    // Use median to avoid outliers
-    heights.sort((a, b) => a - b);
-    const median = heights[Math.floor(heights.length / 2)];
-    const maxH   = window.innerHeight * 0.75;
-    const h      = Math.min(median, maxH);
+
+    let h;
+    const maxH = window.innerHeight * 0.75;
+    if (heights.length === 0) {
+      // Fallback: no opener images loaded yet — use 75vh
+      h = maxH;
+    } else {
+      // Use median to avoid outliers
+      heights.sort((a, b) => a - b);
+      const median = heights[Math.floor(heights.length / 2)];
+      h = Math.min(median, maxH);
+    }
 
     document.querySelectorAll('.shooting-grid[data-hero-gallery]').forEach(grid => {
       grid.querySelectorAll('.grid-item img').forEach(img => {
